@@ -1,11 +1,13 @@
 """A human agent."""
-from .qwixx import Agent
+from typing import List
+
+from .qwixx import Agent, Board, DieRoll
 
 
 class HumanAgent(Agent):
     """A human agent."""
 
-    def move(self, dice, boards, active_player):
+    def move(self, dice: DieRoll, boards: List[Board], active_player: int):
         print(f"Player {self.number} to move.")
         print()
 
@@ -33,7 +35,7 @@ class HumanAgent(Agent):
                     )
                     if color == "cancel":
                         break
-                    boards[self.number].cross(dice.public_sum, color)
+                    boards[self.number].cross(dice.public_sum(), color)
                     numbers_taken += 1
                     break
                 except ValueError as e:
